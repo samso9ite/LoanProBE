@@ -98,7 +98,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             return [IsAccountOfficer()]
         elif self.action in ['list', 'retrieve']:
-            return [IsAccountOfficer() | IsAdmin()]
+            from rest_framework.permissions import OR
+            return [OR(IsAccountOfficer(), IsAdmin())]
         elif self.action in ['update', 'partial_update']:
             return [IsAdmin()]
         else:

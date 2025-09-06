@@ -14,5 +14,5 @@ router.register(r'admin-dashboard', views.AdminDashboardViewSet, basename='admin
 router.register(r'audit-logs', views.AuditLogViewSet, basename='audit-logs')
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
