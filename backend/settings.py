@@ -127,6 +127,8 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.FormParser',
     ],
+    # Custom exception handler for better error messages
+    'EXCEPTION_HANDLER': 'loanpro.exceptions.custom_exception_handler',
 }
 
 # CORS Settings
@@ -239,3 +241,39 @@ SESSION_COOKIE_HTTPONLY = True
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
 FILE_UPLOAD_PERMISSIONS = 0o644
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
+
+# Swagger UI Configuration
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'Token-based authentication with required prefix "Token"'
+        }
+    },
+    'USE_SESSION_AUTH': True,
+    'JSON_EDITOR': True,
+    'SUPPORTED_SUBMIT_METHODS': [
+        'get',
+        'post',
+        'put',
+        'delete',
+        'patch'
+    ],
+    'OPERATIONS_SORTER': 'alpha',
+    'TAGS_SORTER': 'alpha',
+    'DOC_EXPANSION': 'none',
+    'DEEP_LINKING': True,
+    'SHOW_EXTENSIONS': True,
+    'DEFAULT_MODEL_RENDERING': 'model',
+    'DEFAULT_MODEL_DEPTH': 3,
+}
+
+# Redoc Configuration
+REDOC_SETTINGS = {
+    'LAZY_RENDERING': False,
+    'HIDE_HOSTNAME': False,
+    'EXPAND_RESPONSES': 'all',
+    'PATH_IN_MIDDLE': True,
+}
